@@ -1,4 +1,16 @@
 {
+    "name": "dxw/assertions",
+    "description": "Extra assertions for PHPUnit",
+    "homepage": "https://github.com/dxw/assertions",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Adams",
+            "email": "tom@dxw.com",
+            "homepage": "https://www.dxw.com/"
+        }
+    ],
     "require-dev": {
         "phpunit/phpunit": "4.8.*"
     },
