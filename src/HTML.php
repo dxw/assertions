@@ -4,13 +4,13 @@ namespace Dxw\Assertions;
 
 trait HTML
 {
-    public function assertHTMLEquals($expected, $actual, $ignoreWhitespace=false)
+    public function assertHTMLEquals($expected, $actual, $ignoreWhitespace = false)
     {
         $input = [$expected, $actual];
         $output = [];
 
         foreach ($input as $val) {
-            $h = new \DOMDocument;
+            $h = new \DOMDocument();
             $h->loadHTML($val);
             $out = $h->saveHTML();
             if ($ignoreWhitespace) {

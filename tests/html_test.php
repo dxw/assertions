@@ -14,7 +14,7 @@ class HTMLTest extends PHPUnit_Framework_TestCase
 {
     public function testPlainText()
     {
-        $h = new HTMLClass;
+        $h = new HTMLClass();
         $h->assertHTMLEquals('a', 'b');
 
         $this->assertEquals([
@@ -25,7 +25,7 @@ class HTMLTest extends PHPUnit_Framework_TestCase
 
     public function testSimpleHtml()
     {
-        $h = new HTMLClass;
+        $h = new HTMLClass();
         $h->assertHTMLEquals('<a href="aaa">bbb</a>', '<a href ="aaa"  >bbb</a >');
 
         $this->assertEquals([
@@ -36,7 +36,7 @@ class HTMLTest extends PHPUnit_Framework_TestCase
 
     public function testDoNotIgnoreWhitespace()
     {
-        $h = new HTMLClass;
+        $h = new HTMLClass();
         $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
 
         $this->assertEquals([
@@ -47,12 +47,12 @@ class HTMLTest extends PHPUnit_Framework_TestCase
 
     public function testIgnoreWhitespace()
     {
-        $h = new HTMLClass;
+        $h = new HTMLClass();
         $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>', true);
 
         $this->assertEquals([
-            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\"><html><body><a href=\"aaa\">bbb<br></a></body></html>",
-            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\"><html><body><a href=\"aaa\">bbb<br></a></body></html>",
+            '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><html><body><a href="aaa">bbb<br></a></body></html>',
+            '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><html><body><a href="aaa">bbb<br></a></body></html>',
         ], $h->args);
     }
 }
