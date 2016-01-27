@@ -4,7 +4,7 @@ namespace Dxw\Assertions;
 
 trait HTML
 {
-    public function assertHTMLEquals($expected, $actual)
+    public function assertHTMLEquals($expected, $actual, $ignoreWhitespace=false)
     {
         $input = [$expected, $actual];
         $output = [];
@@ -12,7 +12,12 @@ trait HTML
         foreach ($input as $val) {
             $h = new \DOMDocument;
             $h->loadHTML($val);
-            $output[] = $h->saveHTML();
+            $out = $h->saveHTML();
+            if ($ignoreWhitespace) {
+                $out = preg_replace('/>\s+/m', '>', $out);
+                $out = preg_replace('/\s+</m', '<', $out);
+            }
+            $output[] = $out;
         }
 
         $this->assertEquals($output[0], $output[1]);

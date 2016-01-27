@@ -33,4 +33,26 @@ class HTMLTest extends PHPUnit_Framework_TestCase
             "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><a href=\"aaa\">bbb</a></body></html>\n",
         ], $h->args);
     }
+
+    public function testDoNotIgnoreWhitespace()
+    {
+        $h = new HTMLClass;
+        $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
+
+        $this->assertEquals([
+            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><a href=\"aaa\">\nbbb   <br></a></body></html>\n",
+            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><a href=\"aaa\">bbb<br></a></body></html>\n",
+        ], $h->args);
+    }
+
+    public function testIgnoreWhitespace()
+    {
+        $h = new HTMLClass;
+        $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>', true);
+
+        $this->assertEquals([
+            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\"><html><body><a href=\"aaa\">bbb<br></a></body></html>",
+            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\"><html><body><a href=\"aaa\">bbb<br></a></body></html>",
+        ], $h->args);
+    }
 }
