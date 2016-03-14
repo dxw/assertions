@@ -10,9 +10,9 @@ trait HTML
         $output = [];
 
         foreach ($input as $val) {
-            $h = new \DOMDocument();
-            $h->loadHTML($val);
-            $out = $h->saveHTML();
+            $html5 = new \Masterminds\HTML5();
+            $dom = $html5->loadHTML('<div>'.$val.'</div>');
+            $out = $dom->saveHTML();
             if ($ignoreWhitespace) {
                 $out = preg_replace('/>\s+/m', '>', $out);
                 $out = preg_replace('/\s+</m', '<', $out);

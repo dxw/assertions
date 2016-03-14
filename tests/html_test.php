@@ -18,8 +18,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEquals('a', 'b');
 
         $this->assertEquals([
-            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><p>a</p></body></html>\n",
-            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><p>b</p></body></html>\n",
+            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div>a</div></html>\n",
+            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div>b</div></html>\n",
         ], $h->args);
     }
 
@@ -29,8 +29,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEquals('<a href="aaa">bbb</a>', '<a href ="aaa"  >bbb</a >');
 
         $this->assertEquals([
-            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><a href=\"aaa\">bbb</a></body></html>\n",
-            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><a href=\"aaa\">bbb</a></body></html>\n",
+            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">bbb</a></div></html>\n",
+            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">bbb</a></div></html>\n",
         ], $h->args);
     }
 
@@ -40,8 +40,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
 
         $this->assertEquals([
-            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><a href=\"aaa\">\nbbb   <br></a></body></html>\n",
-            "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<html><body><a href=\"aaa\">bbb<br></a></body></html>\n",
+            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">\nbbb   <br></br>\t</a></div></html>\n",
+            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">bbb<br></br></a></div></html>\n",
         ], $h->args);
     }
 
@@ -51,8 +51,14 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>', true);
 
         $this->assertEquals([
-            '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><html><body><a href="aaa">bbb<br></a></body></html>',
-            '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><html><body><a href="aaa">bbb<br></a></body></html>',
+            '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><div><a href="aaa">bbb<br></br></a></div></html>',
+            '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><div><a href="aaa">bbb<br></br></a></div></html>',
         ], $h->args);
+    }
+
+    public function testNewerElements()
+    {
+        $h = new HTMLClass();
+        $h->assertHTMLEquals('<article></article>', '<article></article>');
     }
 }
