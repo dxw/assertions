@@ -11,8 +11,8 @@ trait HTML
 
         foreach ($input as $val) {
             $html5 = new \Masterminds\HTML5();
-            $dom = $html5->loadHTML('<div>'.$val.'</div>');
-            $out = $dom->saveHTML();
+            $dom = $html5->loadHTMLFragment('<div>'.$val.'</div>');
+            $out = $html5->saveHTML($dom);
             if ($ignoreWhitespace) {
                 $out = preg_replace('/>\s+/m', '>', $out);
                 $out = preg_replace('/\s+</m', '<', $out);

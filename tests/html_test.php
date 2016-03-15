@@ -18,8 +18,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEqualsStrictWhitespace('a', 'b');
 
         $this->assertEquals([
-            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div>a</div></html>\n",
-            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div>b</div></html>\n",
+            '<div>a</div>',
+            '<div>b</div>',
         ], $h->args);
     }
 
@@ -29,8 +29,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEqualsStrictWhitespace('<a href="aaa">bbb</a>', '<a href ="aaa"  >bbb</a >');
 
         $this->assertEquals([
-            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">bbb</a></div></html>\n",
-            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">bbb</a></div></html>\n",
+            '<div><a href="aaa">bbb</a></div>',
+            '<div><a href="aaa">bbb</a></div>',
         ], $h->args);
     }
 
@@ -40,8 +40,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEqualsStrictWhitespace("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
 
         $this->assertEquals([
-            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">\nbbb   <br></br>\t</a></div></html>\n",
-            "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">bbb<br></br></a></div></html>\n",
+            "<div><a href=\"aaa\">\nbbb   <br>\t</a></div>",
+            '<div><a href="aaa">bbb<br></a></div>',
         ], $h->args);
     }
 
@@ -51,8 +51,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
 
         $this->assertEquals([
-            '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><div><a href="aaa">bbb<br></br></a></div></html>',
-            '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><div><a href="aaa">bbb<br></br></a></div></html>',
+            '<div><a href="aaa">bbb<br></a></div>',
+            '<div><a href="aaa">bbb<br></a></div>',
         ], $h->args);
     }
 
