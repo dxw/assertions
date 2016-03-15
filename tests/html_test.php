@@ -60,5 +60,10 @@ class HTMLTest extends PHPUnit_Framework_TestCase
     {
         $h = new HTMLClass();
         $h->assertHTMLEqualsStrictWhitespace('<article></article>', '<article></article>');
+
+        $this->assertEquals([
+            '<div><article></article></div>',
+            '<div><article></article></div>',
+        ], $h->args);
     }
 }
