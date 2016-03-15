@@ -18,8 +18,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEqualsStrictWhitespace('a', 'b');
 
         $this->assertEquals([
-            '<div>a</div>',
-            '<div>b</div>',
+            'a',
+            'b',
         ], $h->args);
     }
 
@@ -29,8 +29,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEqualsStrictWhitespace('<a href="aaa">bbb</a>', '<a href ="aaa"  >bbb</a >');
 
         $this->assertEquals([
-            '<div><a href="aaa">bbb</a></div>',
-            '<div><a href="aaa">bbb</a></div>',
+            '<a href="aaa">bbb</a>',
+            '<a href="aaa">bbb</a>',
         ], $h->args);
     }
 
@@ -40,8 +40,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEqualsStrictWhitespace("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
 
         $this->assertEquals([
-            "<div><a href=\"aaa\">\nbbb   <br>\t</a></div>",
-            '<div><a href="aaa">bbb<br></a></div>',
+            "<a href=\"aaa\">\nbbb   <br>\t</a>",
+            '<a href="aaa">bbb<br></a>',
         ], $h->args);
     }
 
@@ -51,8 +51,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
 
         $this->assertEquals([
-            '<div><a href="aaa">bbb<br></a></div>',
-            '<div><a href="aaa">bbb<br></a></div>',
+            '<a href="aaa">bbb<br></a>',
+            '<a href="aaa">bbb<br></a>',
         ], $h->args);
     }
 
@@ -62,8 +62,8 @@ class HTMLTest extends PHPUnit_Framework_TestCase
         $h->assertHTMLEqualsStrictWhitespace('<article></article>', '<article></article>');
 
         $this->assertEquals([
-            '<div><article></article></div>',
-            '<div><article></article></div>',
+            '<article></article>',
+            '<article></article>',
         ], $h->args);
     }
 }

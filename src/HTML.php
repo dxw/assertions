@@ -17,6 +17,8 @@ trait HTML
                 $out = preg_replace('/>\s+/m', '>', $out);
                 $out = preg_replace('/\s+</m', '<', $out);
             }
+            $out = preg_replace('_^<div>_', '', $out);
+            $out = preg_replace('_</div>$_', '', $out);
             $output[] = $out;
         }
 
