@@ -19,12 +19,12 @@
             <a   href="aaa"   >bbb</a>
             ', $output);
 
-            // Ignore semantic whitespace differences
-            $this->assertHTMLEquals('
+            // Be strict about whitespace
+            $this->assertHTMLEqualsStrictWhitespace('
             <a   href="aaa"   >
             bbb
             </a>
-            ', $output, true);
+            ', $output);
         }
     }
 
@@ -32,7 +32,8 @@
 
 ### \Dxw\Assertions\HTML
 
-    assertHTMLEquals($expected, $actual, $ignoreWhitespace)
+    assertHTMLEquals($expected, $actual)
+    assertHTMLEqualsStrictWhitespace($expected, $actual)
 
 ## Licence
 
