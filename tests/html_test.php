@@ -15,7 +15,7 @@ class HTMLTest extends PHPUnit_Framework_TestCase
     public function testPlainText()
     {
         $h = new HTMLClass();
-        $h->assertHTMLEquals('a', 'b');
+        $h->assertHTMLEqualsStrictWhitespace('a', 'b');
 
         $this->assertEquals([
             "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div>a</div></html>\n",
@@ -26,7 +26,7 @@ class HTMLTest extends PHPUnit_Framework_TestCase
     public function testSimpleHtml()
     {
         $h = new HTMLClass();
-        $h->assertHTMLEquals('<a href="aaa">bbb</a>', '<a href ="aaa"  >bbb</a >');
+        $h->assertHTMLEqualsStrictWhitespace('<a href="aaa">bbb</a>', '<a href ="aaa"  >bbb</a >');
 
         $this->assertEquals([
             "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">bbb</a></div></html>\n",
@@ -37,7 +37,7 @@ class HTMLTest extends PHPUnit_Framework_TestCase
     public function testDoNotIgnoreWhitespace()
     {
         $h = new HTMLClass();
-        $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
+        $h->assertHTMLEqualsStrictWhitespace("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
 
         $this->assertEquals([
             "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><div><a href=\"aaa\">\nbbb   <br></br>\t</a></div></html>\n",
@@ -48,7 +48,7 @@ class HTMLTest extends PHPUnit_Framework_TestCase
     public function testIgnoreWhitespace()
     {
         $h = new HTMLClass();
-        $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>', true);
+        $h->assertHTMLEquals("<a href='aaa'>\nbbb   <br>\t</a>", '<a href="aaa">bbb<br></a>');
 
         $this->assertEquals([
             '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><div><a href="aaa">bbb<br></br></a></div></html>',
@@ -59,6 +59,6 @@ class HTMLTest extends PHPUnit_Framework_TestCase
     public function testNewerElements()
     {
         $h = new HTMLClass();
-        $h->assertHTMLEquals('<article></article>', '<article></article>');
+        $h->assertHTMLEqualsStrictWhitespace('<article></article>', '<article></article>');
     }
 }
