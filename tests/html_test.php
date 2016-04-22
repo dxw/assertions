@@ -81,4 +81,18 @@ class HTMLTest extends PHPUnit_Framework_TestCase
             '<article></article>',
         ], $h->args);
     }
+
+    public function testPrettyPrinting()
+    {
+        $h = new HTMLClass();
+        $h->assertHTMLEquals(
+            '<article><nav><ul></ul></nav></article>',
+            '<article></article>'
+        );
+
+        $this->assertEquals([
+            "<article>\n\t<nav>\n\t\t<ul></ul>\n\t</nav>\n</article>",
+            '<article></article>',
+        ], $h->args);
+    }
 }
