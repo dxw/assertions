@@ -2,7 +2,7 @@
 
 ## Installation
 
-    composer require --dev dxw/assertions=dev-master
+    composer require --dev dxw/assertions
 
 ## Usage
 
